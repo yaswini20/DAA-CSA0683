@@ -1,0 +1,22 @@
+def tsp(graph):
+    n=len(graph)
+    visiteds=(1<<n)-1
+    memo=[[None]*(1<<n) for _ in range(n)]
+    def visit(city,visited):
+        if visited==visiteds:
+            return graph[city][0]
+        if memo[city][visited] is not None:
+            return memo[city][visited]
+        minc=float('inf')
+        for nextc in range(n):
+            if not visited&(1<<nextc):
+                cost=graph[city][nextc]+visit(nextc,visited | (1<<nextc))
+                if cost<minc:
+                    minc=cost
+        memo[city][visited]=minc
+        return minc
+    return visit(0,1)
+graph= [0, 10, 15, 20],[5, 0,9, 10],[6, 13, 0, 12],[8, 8, 9, 0]
+
+shortest=tsp(graph)
+print(shortest)
