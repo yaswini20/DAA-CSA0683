@@ -1,0 +1,18 @@
+def string_match(text, pattern):
+    def match_helper(text, pattern, text_start, pattern_start):
+        # Base cases
+        if pattern_start == len(pattern):
+            return True
+        if text_start == len(text):
+            return False
+        mid = len(pattern) // 2
+        if mid == 0:
+            return text[text_start] == pattern[pattern_start]
+        left_match = match_helper(text, pattern, text_start, pattern_start)
+        right_match = match_helper(text, pattern, text_start + mid, pattern_start + mid)
+        return left_match and right_match
+    return match_helper(text, pattern, 0, 0)
+text = "ABABDABACDABABCABAB"
+pattern = "ABABCABAB"
+result = string_match(text, pattern)
+print(f"Pattern found: ")
