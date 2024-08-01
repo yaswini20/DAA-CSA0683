@@ -1,0 +1,13 @@
+V, edges = 4, [(1, 2, 4), (1, 4, 5), (4, 3, 3), (3, 2, -10)]
+dist = [float('inf')] * (V + 1); dist[1] = 0  
+
+for _ in range(V - 1):
+    for u, v, w in edges:
+        if dist[u] != float('inf') and dist[u] + w < dist[v]:
+            dist[v] = dist[u] + w
+
+if any(dist[u] != float('inf') and dist[u] + w < dist[v] for u, v, w in edges):
+    print("Graph contains negative weight cycle")
+else:
+    print(f"Distances from source 1: {dist[1:V + 1]}")
+    
