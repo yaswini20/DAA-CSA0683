@@ -1,0 +1,10 @@
+coins=[5,2,1]
+amount=18
+coins.sort(reverse=True)
+result=[]
+for coin in coins:
+    while amount>=coin:
+        amount-=coin
+        result.append(coin)
+print(f"Coins{result}")
+
